@@ -1,24 +1,49 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
+import request from 'supertest';
 import { AppModule } from './../src/app.module';
+import { EnvConfigService } from '../src/share/infrastructure/env-config/env-config.service';
+import { ConfigService } from '@nestjs/config';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile();
+    })
+      .overrideProvider(ConfigService)
+      .useValue({
+        get: jest.fn((key: string) => {
+          const config = {
+            PORT: 3000,
+            NODE_ENV: 'test'
+          };
+          return config[key];
+        }),
+      })
+      .compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  afterAll(async () => {
+    await app.close();
+  });
+
+  describe('/ (GET)', () => {
+    it('should return "Hello World!"', () => {
+      return request(app.getHttpServer())
+        .get('/')
+        .expect(200)
+        .expect('Hello World!');
+    });
+
+    it('should return 404 for non-existing route', () => {
+      return request(app.getHttpServer())
+        .get('/non-existing')
+        .expect(404);
+    });
   });
 });
