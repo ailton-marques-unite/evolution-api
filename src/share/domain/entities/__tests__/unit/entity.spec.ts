@@ -2,18 +2,17 @@ import { validate as uuidValidate } from 'uuid';
 import { Entity } from '../../entity';
 
 type StubProps = {
-  prop1: string
-  prop2: number
-}
+  prop1: string;
+  prop2: number;
+};
 
 class StubEntity extends Entity<StubProps> {}
 
 describe('Entity unit tests', () => {
-
   it('Should set props and id', () => {
     const props = {
       prop1: 'value1',
-      prop2: 15
+      prop2: 15,
     };
 
     const entity = new StubEntity(props);
@@ -26,7 +25,7 @@ describe('Entity unit tests', () => {
   it('Should accept a valid uuid', () => {
     const props = {
       prop1: 'value1',
-      prop2: 15
+      prop2: 15,
     };
     const id = '8a35c424-3dc8-498c-b4d5-38ce7f9f557d';
 
@@ -39,7 +38,7 @@ describe('Entity unit tests', () => {
   it('Must be convert a entity to a Javascript Object', () => {
     const props = {
       prop1: 'value1',
-      prop2: 15
+      prop2: 15,
     };
     const id = '8a35c424-3dc8-498c-b4d5-38ce7f9f557d';
 
@@ -48,6 +47,6 @@ describe('Entity unit tests', () => {
     expect(entity.toJSON()).toStrictEqual({
       id,
       ...props,
-    })
+    });
   });
-})
+});

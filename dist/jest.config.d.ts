@@ -7,6 +7,7 @@ declare const _default: {
     transform: {
         "^.+\\.(t|j)s$": string;
     };
+    transformIgnorePatterns: string[];
     collectCoverageFrom: string[];
     coverageDirectory: string;
     testEnvironment: string;

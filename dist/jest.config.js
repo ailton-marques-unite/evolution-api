@@ -11,6 +11,9 @@ exports.default = {
     transform: {
         "^.+\\.(t|j)s$": "ts-jest"
     },
+    transformIgnorePatterns: [
+        "node_modules/(?!uuid)/"
+    ],
     collectCoverageFrom: [
         "**/*.(t|j)s"
     ],

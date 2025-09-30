@@ -4,6 +4,10 @@ import { IsString, IsNotEmpty } from 'class-validator';
 export class CreateInstanceDto {
   @ApiProperty({ description: 'The id of the instance' })
   @IsString()
-  @IsNotEmpty()
   id: string;
+
+  @ApiProperty({ description: 'The name of the instance' })
+  @IsString()
+  @IsNotEmpty()
+  name: string;
 }

@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { AppModule } from './../src/app.module';
-import { EnvConfigService } from '../src/share/infrastructure/env-config/env-config.service';
 import { ConfigService } from '@nestjs/config';
 
 describe('AppController (e2e)', () => {
@@ -17,7 +16,7 @@ describe('AppController (e2e)', () => {
         get: jest.fn((key: string) => {
           const config = {
             PORT: 3000,
-            NODE_ENV: 'test'
+            NODE_ENV: 'test',
           };
           return config[key];
         }),
@@ -33,17 +32,15 @@ describe('AppController (e2e)', () => {
   });
 
   describe('/ (GET)', () => {
-    it('should return "Hello World!"', () => {
+    it('should return "Health check: OK"', () => {
       return request(app.getHttpServer())
         .get('/')
         .expect(200)
-        .expect('Hello World!');
+        .expect(/Health check: OK/);
     });
 
     it('should return 404 for non-existing route', () => {
-      return request(app.getHttpServer())
-        .get('/non-existing')
-        .expect(404);
+      return request(app.getHttpServer()).get('/non-existing').expect(404);
     });
   });
 });
