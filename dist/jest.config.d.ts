@@ -1,7 +1,7 @@
 declare const _default: {
     moduleFileExtensions: string[];
     moduleNameMapper: {
-        [key: string]: string | string[];
+        [x: string]: string | string[];
     };
     testRegex: string;
     transform: {

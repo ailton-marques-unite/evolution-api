@@ -11,12 +11,13 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const env_config_module_1 = require("./share/infrastructure/env-config/env-config.module");
+const instances_module_1 = require("./instances/instances.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [env_config_module_1.EnvConfigModule],
+        imports: [env_config_module_1.EnvConfigModule, instances_module_1.InstancesModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
