@@ -3,6 +3,8 @@ import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
 import { FindWebhookResponse } from '../../application/dtos/responses/create-webhook.response';
+import { SetWebhookDto } from '../../application/dtos/set-webhook.dto';
+import { SetWebhookResponse } from '../../application/dtos/responses/set-webhook.response';
 
 @Injectable()
 export class WebhookRepository {
@@ -28,6 +30,20 @@ export class WebhookRepository {
       return response.data;
     } catch (error: any) {
       if (error?.response?.status === 404) return null;
+      throw error;
+    }
+  }
+
+  async setWebhook(instanceName: string, setWebhookDto: SetWebhookDto): Promise<SetWebhookResponse> {
+    try {
+      const response = await firstValueFrom(
+        this.httpService.post<SetWebhookResponse>(`${this.baseUrl}/set/${instanceName}`, setWebhookDto, {
+          headers: this.getAuthHeader(),
+        }),
+      );
+      return response.data;
+    } catch (error: any) {
+      if (error?.response?.status === 404) return error.response.data;
       throw error;
     }
   }

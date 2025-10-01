@@ -1,0 +1,34 @@
+### Test Webhook Set Endpoint
+POST http://localhost:3000/webhook/set/test-instance
+Content-Type: application/json
+
+{
+  "webhookByEvents": true,
+  "webhookBase64": false,
+  "webhook": {
+    "events": [
+      "message.upsert",
+      "connection.update",
+      "presence.update"
+    ],
+    "url": "https://example.com/webhook",
+    "enabled": true
+  }
+}
+
+### Test Webhook Set Endpoint - Minimal Configuration
+POST http://localhost:3000/webhook/set/another-instance
+Content-Type: application/json
+
+{
+  "webhook": {
+    "enabled": true,
+    "url": "https://myapp.com/webhook",
+    "events": [
+      "message.upsert"
+    ]
+  }
+}
+
+### Test Webhook Find Endpoint (existing)
+GET http://localhost:3000/webhook/find/test-instance
