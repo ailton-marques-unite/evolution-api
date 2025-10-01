@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateInstanceDto } from '../dtos/create-instance.dto';
 import { UpdateInstanceDto } from '../dtos/update-instance.dto';
 import { Instance } from '../../domain/entities/instance.entity';
+import { CreateInstanceResponse } from '../dtos/responses/create-instance.response';
 import { InstanceRepository } from '../../infrastructure/repositories/instance.repository';
 import { InstanceServiceInterface } from './instance.service.interface';
 
@@ -9,8 +10,8 @@ import { InstanceServiceInterface } from './instance.service.interface';
 export class InstanceService implements InstanceServiceInterface {
   constructor(private readonly instanceRepository: InstanceRepository) {}
 
-  create() {
-    return 'This action adds a new instance';
+  async create(createInstanceDto: CreateInstanceDto): Promise<CreateInstanceResponse> {
+    return this.instanceRepository.create(createInstanceDto);
   }
 
   findAll() {
