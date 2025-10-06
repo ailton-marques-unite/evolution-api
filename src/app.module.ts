@@ -8,12 +8,14 @@ import { SendMessageModule } from './send-message/send-message.module';
 import { ChatControllerModule } from './chat-controller/chat-controller.module';
 import { ProfileSettingsModule } from './profile-settings/profile-settings.module';
 import { OpenAiModule } from './open-ai/open-ai.module';
+import { ChatwootModule } from './chatwoot/chatwoot.module';
+import { WebsocketModule } from './websocket/websocket.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }), 
     InstanceModule, 
     WebhookModule, 
-    SendMessageModule, ChatControllerModule, ProfileSettingsModule, OpenAiModule,
+    SendMessageModule, ChatControllerModule, ProfileSettingsModule, OpenAiModule, ChatwootModule, WebsocketModule,
   ],
   controllers: [AppController],
   providers: [AppService],
