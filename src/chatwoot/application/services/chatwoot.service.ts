@@ -12,7 +12,7 @@ export class ChatwootService {
     return this.chatwootRepository.findByName(instanceName);
   }
 
-  setChatwoot(instanceName: string, updateChatwootDto: UpdateChatwootDto) {
-    return this.chatwootRepository.setChatwoot(instanceName, updateChatwootDto);
+  setChatwoot(instanceName: string, createChatwootDto: CreateChatwootDto) {
+    return this.chatwootRepository.setChatwoot(instanceName, createChatwootDto);
   }
 }
